@@ -24,7 +24,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title"> Form Warga </h3>
+                <h3 class="modal-title"> Form Warga Adaw </h3>
                 <button class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
             </div>
             <form class="form-horizontal" id="frm_header">
@@ -91,15 +91,15 @@
             url: "<?= site_url() ?>master_data/warga/getWarga",
             type: 'POST',
             dataType: 'JSON',
-            success: function(data){
-                if(data.length > 0){
+            success: function(data) {
+                if (data.length > 0) {
                     let html = '';
 
-                    for(let i = 0; i < data.length; i++){
-                        html += '<tr>'+
-                                    `<td>${data[i].nik}</td>`+
-                                    `<td><a href="javascript:void(0)" data-id="${data[i].id}">${data[i].name}</a></td>`+
-                                    `</tr>`;
+                    for (let i = 0; i < data.length; i++) {
+                        html += '<tr>' +
+                            `<td>${data[i].nik}</td>` +
+                            `<td><a href="javascript:void(0)" data-id="${data[i].id}">${data[i].name}</a></td>` +
+                            `</tr>`;
                     }
 
                     $('#table_data tbody').html(html);
@@ -108,12 +108,12 @@
         })
     }
 
-    $(document).ready(function(){
+    $(document).ready(function() {
         getData();
 
-        $('#btn_modal_save').on('click', function(e){
+        $('#btn_modal_save').on('click', function(e) {
             $('#frm_header').validate({
-                submitHandler: function(){
+                submitHandler: function() {
                     e.preventDefault();
 
                     $.ajax({
@@ -121,8 +121,8 @@
                         type: 'POST',
                         dataType: 'JSON',
                         data: $('#frm_header').serialize(),
-                        success: function(data){
-                            if(data.status === 'success'){
+                        success: function(data) {
+                            if (data.status === 'success') {
                                 Swal.fire({
                                     icon: 'success',
                                     title: data.message
@@ -130,7 +130,7 @@
                                     $('#modalEdit').modal('hide');
                                     getData();
                                 });
-                            }else{
+                            } else {
                                 Swal.fire({
                                     icon: 'warning',
                                     title: data.message
