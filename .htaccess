@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+#RewriteBase /mantul
+#RewriteCond %{REQUEST_URI} ^system.*
+#RewriteRule ^(.*)$ /ci_react/index.php/$1 [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L]
+#RewriteCond $1 !^(index\.php|image|css|public)
+#RewriteRule ^(.*)$ /ci_react/index.php/$1 [L]
+</IfModule>
