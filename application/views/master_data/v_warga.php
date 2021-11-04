@@ -10,7 +10,7 @@
             <table class="table table-bordered" id="table_data">
                 <thead class="text-center">
                     <th>NIK</th>
-                    <th>Nama Wargas</th>
+                    <th>Nama Warga</th>
                 </thead>
                 <tbody>
 
