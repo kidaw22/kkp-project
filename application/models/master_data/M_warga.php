@@ -12,6 +12,17 @@ class M_warga extends CI_Model{
 
         return $result;
     }
+
+    public function get_warga_detail($prm_id = ''){
+        $strQuery = "SELECT *
+                        from warga
+                        where id = $prm_id";
+
+        $query = $this->db->query($strQuery);
+        $result = $query->row();
+
+        return $result;
+    }
 }
 
 ?>

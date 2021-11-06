@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalEdit"> Tambah </button>
+                <button type="button" class="btn btn-primary float-right" id="btn_add" data-toggle="modal" data-target="#modalEdit"> Tambah </button>
             </div>
         </div>
 
@@ -11,6 +11,7 @@
                 <thead class="text-center">
                     <th>NIK</th>
                     <th>Nama Warga</th>
+                    <th></th>
                 </thead>
                 <tbody>
 
@@ -57,7 +58,7 @@
 
                     <div class="form-group">
                         <label class="col-form-label"> No. NPWP </label>
-                        <input type="number" name="No_NPWP" id="No_NPWP" class="form-control" required>
+                        <input type="text" name="No_NPWP" id="No_NPWP" class="form-control" required>
                     </div>
 
                     <div class="form-group">
@@ -98,7 +99,8 @@
                     for (let i = 0; i < data.length; i++) {
                         html += '<tr>' +
                             `<td>${data[i].nik}</td>` +
-                            `<td><a href="javascript:void(0)" data-id="${data[i].id}">${data[i].name}</a></td>` +
+                            `<td><a class="item-edit" href="javascript:void(0)" data-id="${data[i].id}" >${data[i].name}</a></td>` +
+                            `<td><button class="btn btn-danger btn-sm item-delete" data-id="${data[i].id}">X</button></td>` +
                             `</tr>`;
                     }
 
@@ -106,10 +108,81 @@
                 }
             }
         })
+
+    }
+    
+    const getDetail = id => {
+        $.ajax({
+            url: "<?= site_url() ?>master_data/warga/getWargaDetail/"+id,
+            type: 'POST',
+            dataType: 'JSON',
+            success: function(data){
+                console.log(data);
+                $('#id').val(data.id);
+                $('#nik').val(data.NIK);
+                $('#nama').val(data.Nama);
+                $('#Alamat_KTP').val(data.Alamat_KTP);
+                $('#No_Telp').val(data.No_Telp);
+                $('#No_BPJS').val(data.No_BPJS);
+                $('#No_NPWP').val(data.No_NPWP);
+                $('#Tanggal_Lahir').val(data.Tanggal_Lahir);
+                $('#Alamat_Domisili').val(data.Alamat_Domisili);
+                $('#No_KK').val(data.No_KK);
+            }
+        });
+    }
+
+    const deleteData = id => {
+        $.ajax({
+            url: "<?= site_url() ?>master_data/warga/deleteWarga/"+id,
+            type: 'POST',
+            dataType: 'JSON',
+            success: function(data){
+                if(data.status === 'success'){
+                    Swal.fire({
+                        title: data.message,
+                        icon: 'success'
+                    }).then(() => {
+                        getData();
+                    })
+                }
+            }
+        })
     }
 
     $(document).ready(function() {
         getData();
+
+        $('#btn_add').on('click', function(){
+            $('#frm_header')[0].reset();
+            $('#id').val('');
+        })
+
+        $('#table_data tbody').on('click', '.item-edit', function(){
+            const itemId = $(this).data('id');
+            
+            $('#modalEdit').modal('show');
+
+            getDetail(itemId);
+        });
+
+        $('#table_data tbody').on('click', '.item-delete', function(){
+            const itemId = $(this).data('id');
+
+            Swal.fire({
+                title: 'Apakah anda yakin?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'OK',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    deleteData(itemId);
+                }
+            })
+        });
 
         $('#btn_modal_save').on('click', function(e) {
             $('#frm_header').validate({
