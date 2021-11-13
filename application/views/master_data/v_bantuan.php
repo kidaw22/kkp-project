@@ -9,8 +9,9 @@
         <div class="row mt-2">
             <table class="table table-bordered" id="table_data">
                 <thead class="text-center">
-                    <th>NIK</th>
-                    <th>Nama Warga</th>
+                    <th>Nama Bantuan</th>
+                    <th>Periode Dari</th>
+                    <th>Periode Sampai</th>
                     <th></th>
                 </thead>
                 <tbody>
@@ -25,55 +26,35 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title"> Form Warga </h3>
+                <h3 class="modal-title"> Form Bantuan </h3>
                 <button class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
             </div>
             <form class="form-horizontal" id="frm_header">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label class="col-form-label"> NIK </label>
+                        <label class="col-form-label"> Nama Bantuan </label>
                         <input type="hidden" name="id" id="id">
-                        <input type="text" name="nik" id="nik" class="form-control" required>
+                        <input type="text" name="Nama_Bantuan" id="Nama_Bantuan" class="form-control" required>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-form-label"> Nama </label>
-                        <input type="text" name="nama" id="nama" class="form-control" required>
+                        <label class="col-form-label"> Periode Dari </label>
+                        <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                            <input type="text" name="Periode_Dari" id="Periode_Dari" class="form-control datetimepicker-input" data-target="#reservationdate" required>
+                            <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-form-label"> Alamat KTP </label>
-                        <input type="text" name="Alamat_KTP" id="Alamat_KTP" class="form-control" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-form-label"> No.Telp </label>
-                        <input type="number" name="No_Telp" id="No_Telp" class="form-control" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-form-label"> No. BPJS </label>
-                        <input type="number" name="No_BPJS" id="No_BPJS" class="form-control" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-form-label"> No. NPWP </label>
-                        <input type="text" name="No_NPWP" id="No_NPWP" class="form-control" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-form-label"> Tanggal Lahir </label>
-                        <input type="date" name="Tanggal_Lahir" id="Tanggal_Lahir" class="form-control" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-form-label"> Alamat Domisili </label>
-                        <input type="text" name="Alamat_Domisili" id="Alamat_Domisili" class="form-control" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-form-label"> No. KK </label>
-                        <input type="text" name="No_KK" id="No_KK" class="form-control" required>
+                        <label class="col-form-label"> Periode Sampai </label>
+                        <div class="input-group date" id="reservationdateuntil" data-target-input="nearest">
+                            <input type="text" name="Periode_Sampai" id="Periode_Sampai" class="form-control" data-target="#reservationdateuntil" required>
+                            <div class="input-group-append" data-target="#reservationdateuntil" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -89,7 +70,7 @@
 <script>
     const getData = () => {
         $.ajax({
-            url: "<?= site_url() ?>master_data/warga/getWarga",
+            url: "<?= site_url() ?>master_data/bantuan/getBantuan",
             type: 'POST',
             dataType: 'JSON',
             success: function(data) {
@@ -98,8 +79,9 @@
 
                     for (let i = 0; i < data.length; i++) {
                         html += '<tr>' +
-                            `<td>${data[i].nik}</td>` +
-                            `<td><a class="item-edit" href="javascript:void(0)" data-id="${data[i].id}" >${data[i].name}</a></td>` +
+                            `<td><a class="item-edit" href="javascript:void(0)" data-id="${data[i].id}"> ${data[i].Nama_Bantuan}</a></td>` +
+                            `<td> ${data[i].Periode_Dari} </td>` +
+                            `<td> ${data[i].Periode_Sampai} </td>` +
                             `<td><button class="btn btn-danger btn-sm item-delete" data-id="${data[i].id}">X</button></td>` +
                             `</tr>`;
                     }
@@ -113,28 +95,22 @@
     
     const getDetail = id => {
         $.ajax({
-            url: "<?= site_url() ?>master_data/warga/getWargaDetail/"+id,
+            url: "<?= site_url() ?>master_data/bantuan/getBantuanDetail/"+id,
             type: 'POST',
             dataType: 'JSON',
             success: function(data){
                 console.log(data);
                 $('#id').val(data.id);
-                $('#nik').val(data.NIK);
-                $('#nama').val(data.Nama);
-                $('#Alamat_KTP').val(data.Alamat_KTP);
-                $('#No_Telp').val(data.No_Telp);
-                $('#No_BPJS').val(data.No_BPJS);
-                $('#No_NPWP').val(data.No_NPWP);
-                $('#Tanggal_Lahir').val(data.Tanggal_Lahir);
-                $('#Alamat_Domisili').val(data.Alamat_Domisili);
-                $('#No_KK').val(data.No_KK);
+                $('#Nama_Bantuan').val(data.Nama_Bantuan);
+                $('#Periode_Dari').val(data.Periode_Dari);
+                $('#Periode_Sampai').val(data.Periode_Sampai);
             }
         });
     }
 
     const deleteData = id => {
         $.ajax({
-            url: "<?= site_url() ?>master_data/warga/deleteWarga/"+id,
+            url: "<?= site_url() ?>master_data/bantuan/deleteBantuan/"+id,
             type: 'POST',
             dataType: 'JSON',
             success: function(data){
@@ -152,6 +128,14 @@
 
     $(document).ready(function() {
         getData();
+
+        $('#reservationdate').datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+
+        $('#reservationdateuntil').datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
 
         $('#btn_add').on('click', function(){
             $('#frm_header')[0].reset();
@@ -190,7 +174,7 @@
                     e.preventDefault();
 
                     $.ajax({
-                        url: "<?= site_url() ?>master_data/warga/saveWarga",
+                        url: "<?= site_url() ?>master_data/bantuan/saveBantuan",
                         type: 'POST',
                         dataType: 'JSON',
                         data: $('#frm_header').serialize(),

@@ -1,22 +1,10 @@
+<link rel="stylesheet" href="<?= site_url() ?>assets/fullcalendar/lib/main.min.css">
 <section class="content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <button type="button" class="btn btn-primary float-right" id="btn_add" data-toggle="modal" data-target="#modalEdit"> Tambah </button>
+                <div id="fullcalendar"></div>
             </div>
-        </div>
-
-        <div class="row mt-2">
-            <table class="table table-bordered" id="table_data">
-                <thead class="text-center">
-                    <th>NIK</th>
-                    <th>Nama Warga</th>
-                    <th></th>
-                </thead>
-                <tbody>
-
-                </tbody>
-            </table>
         </div>
     </div>
 </section>
@@ -86,10 +74,12 @@
     </div>
 </div>
 
+<script src="<?= site_url() ?>assets/fullcalendar/lib/main.min.js"></script>t
+
 <script>
     const getData = () => {
         $.ajax({
-            url: "<?= site_url() ?>master_data/warga/getWarga",
+            url: "<?= site_url() ?>transaksi/kegiatan/getKegiatan",
             type: 'POST',
             dataType: 'JSON',
             success: function(data) {
@@ -113,7 +103,7 @@
     
     const getDetail = id => {
         $.ajax({
-            url: "<?= site_url() ?>master_data/warga/getWargaDetail/"+id,
+            url: "<?= site_url() ?>transaksi/kegiatan/getKegiatanDetail/"+id,
             type: 'POST',
             dataType: 'JSON',
             success: function(data){
@@ -134,7 +124,7 @@
 
     const deleteData = id => {
         $.ajax({
-            url: "<?= site_url() ?>master_data/warga/deleteWarga/"+id,
+            url: "<?= site_url() ?>transaksi/kegiatan/deleteKegiatan/"+id,
             type: 'POST',
             dataType: 'JSON',
             success: function(data){
@@ -152,6 +142,12 @@
 
     $(document).ready(function() {
         getData();
+
+        const calendarEl = document.querySelector('#fullcalendar');
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth'
+        });
+        calendar.render();
 
         $('#btn_add').on('click', function(){
             $('#frm_header')[0].reset();
@@ -190,7 +186,7 @@
                     e.preventDefault();
 
                     $.ajax({
-                        url: "<?= site_url() ?>master_data/warga/saveWarga",
+                        url: "<?= site_url() ?>transaksi/kegiatan/saveKegiatan",
                         type: 'POST',
                         dataType: 'JSON',
                         data: $('#frm_header').serialize(),
