@@ -23,7 +23,7 @@ class Kegiatan extends CI_Controller {
     public function saveKegiatan(){
         if($this->input->is_ajax_request()){
             $data = [
-                'NIK' => $this->input->post('nik'),
+                'Judul_Kegiatan' => $this->input->post('Judul_Kegiatan'),
                 'Nama' => $this->input->post('nama'),
                 'Alamat_KTP' => $this->input->post('Alamat_KTP'),
                 'No_Telp' => $this->input->post('No_Telp'),
@@ -94,4 +94,3 @@ class Kegiatan extends CI_Controller {
         }
     }
 }
-?>

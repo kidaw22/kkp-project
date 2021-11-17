@@ -94,13 +94,13 @@
             dataType: 'JSON'
         }).then(data => data);
     }
-    
+
     const getDetail = id => {
         $.ajax({
-            url: "<?= site_url() ?>transaksi/kegiatan/getKegiatanDetail/"+id,
+            url: "<?= site_url() ?>transaksi/kegiatan/getKegiatanDetail/" + id,
             type: 'POST',
             dataType: 'JSON',
-            success: function(data){
+            success: function(data) {
                 // console.log(data);
                 $('#id').val(data.id);
                 $('#Judul_Kegiatan').val(data.Judul_Kegiatan);
@@ -109,9 +109,9 @@
                 $('#Deskripsi_Lokasi').val(data.Deskripsi_Lokasi);
                 $('#Tanggal_Mulai').val(data.Tanggal_Mulai);
                 $('#Tanggal_Akhir').val(data.Tanggal_Akhir);
-                
-                if(data.detail.length > 0){
-                    $.each(data.detail, function(key, val){
+
+                if (data.detail.length > 0) {
+                    $.each(data.detail, function(key, val) {
                         $('#Peserta').find(`option[value="${val.Warga_id}"]`).prop('selected', true)
                     });
                 }
@@ -123,11 +123,11 @@
 
     const deleteData = id => {
         $.ajax({
-            url: "<?= site_url() ?>transaksi/kegiatan/deleteKegiatan/"+id,
+            url: "<?= site_url() ?>transaksi/kegiatan/deleteKegiatan/" + id,
             type: 'POST',
             dataType: 'JSON',
-            success: function(data){
-                if(data.status === 'success'){
+            success: function(data) {
+                if (data.status === 'success') {
                     Swal.fire({
                         title: data.message,
                         icon: 'success'
@@ -148,7 +148,7 @@
         $('#Tanggal_Mulai').val(date);
         $('#Tanggal_Akhir').val(date);
 
-        if(id !== ''){
+        if (id !== '') {
             getDetail(id);
         }
     }
@@ -165,10 +165,10 @@
             selectable: true,
             selectHelper: true,
             allDayDefault: true,
-            dateClick: function(info){
+            dateClick: function(info) {
                 showModal('', info.dateStr);
             },
-            eventClick: function(info){
+            eventClick: function(info) {
                 showModal(info.event.id, info.event.start);
             }
         });
@@ -192,7 +192,7 @@
         });
 
         let isSelected = false;
-        $('#select_toggle').on('click', function(){
+        $('#select_toggle').on('click', function() {
             isSelected = !isSelected;
 
             $('#Peserta option').prop('selected', isSelected);
@@ -206,15 +206,15 @@
             format: 'YYYY-MM-DD'
         });
 
-        $('#table_data tbody').on('click', '.item-edit', function(){
+        $('#table_data tbody').on('click', '.item-edit', function() {
             const itemId = $(this).data('id');
-            
+
             $('#modalEdit').modal('show');
 
             getDetail(itemId);
         });
 
-        $('#table_data tbody').on('click', '.item-delete', function(){
+        $('#table_data tbody').on('click', '.item-delete', function() {
             const itemId = $(this).data('id');
 
             Swal.fire({
