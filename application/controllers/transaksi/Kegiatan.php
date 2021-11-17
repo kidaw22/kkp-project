@@ -66,5 +66,25 @@ class Kegiatan extends CI_Controller {
             echo json_encode($return_value);
         }
     }
+
+    public function getCombo(){
+        if($this->input->is_ajax_request()){
+            $type = $this->input->post('type');
+
+            switch($type){
+                case 'warga':
+                    $strQuery = "select
+                                    id as combo_key,
+                                    Nama as combo_name
+                                    from warga";
+                break;
+            }
+
+            $query = $this->db->query($strQuery);
+            $return_value = $query->result_array();
+
+            echo json_encode($return_value);
+        }
+    }
 }
 ?>

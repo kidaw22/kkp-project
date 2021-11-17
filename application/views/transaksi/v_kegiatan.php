@@ -13,55 +13,63 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title"> Form Warga </h3>
+                <h3 class="modal-title"> Kegiatan Bantuan </h3>
                 <button class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
             </div>
             <form class="form-horizontal" id="frm_header">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label class="col-form-label"> NIK </label>
+                        <label class="col-form-label"> Judul Kegiatan </label>
                         <input type="hidden" name="id" id="id">
-                        <input type="text" name="nik" id="nik" class="form-control" required>
+                        <input type="text" name="Judul_Kegiatan" id="Judul_Kegiatan" class="form-control" required>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-form-label"> Nama </label>
-                        <input type="text" name="nama" id="nama" class="form-control" required>
+                        <label class="col-form-label"> Deskripsi Kegiatan </label>
+                        <input type="text" name="Deskripsi_Kegiatan" id="Deskripsi_Kegiatan" class="form-control" required>
+                    </div>
+
+                    <div class="form-group d-none">
+                        <label class="col-form-label"> Tanggal Mulai </label>
+                        <div class="input-group date" id="startdate" data-target-input="nearest">
+                            <input type="text" name="Tanggal_Mulai" id="Tanggal_Mulai" class="form-control datetimepicker-input" data-target="#startdate" required>
+                            <div class="input-group-append" data-target="#startdate" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group d-none">
+                        <label class="col-form-label"> Tanggal Akhir </label>
+                        <div class="input-group date" id="enddate" data-target-input="nearest">
+                            <input type="text" name="Tanggal_Akhir" id="Tanggal_Akhir" class="form-control" data-target="#enddate" required>
+                            <div class="input-group-append" data-target="#enddate" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-form-label"> Alamat KTP </label>
-                        <input type="text" name="Alamat_KTP" id="Alamat_KTP" class="form-control" required>
+                        <label class="col-form-label"> Peserta </label>
+                        <select name="Peserta" id="Peserta" class="form-control" required multiple>
+
+                        </select>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-form-label"> No.Telp </label>
-                        <input type="number" name="No_Telp" id="No_Telp" class="form-control" required>
+                        <div class="col-lg-12">
+                            <a href="javascript:void(0)" class="float-right" id="select_toggle"> Pilih Semua </a>
+                        </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-form-label"> No. BPJS </label>
-                        <input type="number" name="No_BPJS" id="No_BPJS" class="form-control" required>
+                        <label class="col-form-label"> Lokasi </label>
+                        <input type="text" name="Lokasi" id="Lokasi" class="form-control" required>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-form-label"> No. NPWP </label>
-                        <input type="text" name="No_NPWP" id="No_NPWP" class="form-control" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-form-label"> Tanggal Lahir </label>
-                        <input type="date" name="Tanggal_Lahir" id="Tanggal_Lahir" class="form-control" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-form-label"> Alamat Domisili </label>
-                        <input type="text" name="Alamat_Domisili" id="Alamat_Domisili" class="form-control" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-form-label"> No. KK </label>
-                        <input type="text" name="No_KK" id="No_KK" class="form-control" required>
+                        <label class="col-form-label"> Deskripsi Lokasi </label>
+                        <input type="text" name="Deskripsi_Lokasi" id="Deskripsi_Lokasi" class="form-control" required>
                     </div>
 
                 </div>
@@ -78,27 +86,11 @@
 
 <script>
     const getData = () => {
-        $.ajax({
+        return $.ajax({
             url: "<?= site_url() ?>transaksi/kegiatan/getKegiatan",
             type: 'POST',
-            dataType: 'JSON',
-            success: function(data) {
-                if (data.length > 0) {
-                    let html = '';
-
-                    for (let i = 0; i < data.length; i++) {
-                        html += '<tr>' +
-                            `<td>${data[i].nik}</td>` +
-                            `<td><a class="item-edit" href="javascript:void(0)" data-id="${data[i].id}" >${data[i].name}</a></td>` +
-                            `<td><button class="btn btn-danger btn-sm item-delete" data-id="${data[i].id}">X</button></td>` +
-                            `</tr>`;
-                    }
-
-                    $('#table_data tbody').html(html);
-                }
-            }
-        })
-
+            dataType: 'JSON'
+        }).then(data => data);
     }
     
     const getDetail = id => {
@@ -140,14 +132,54 @@
         })
     }
 
-    $(document).ready(function() {
+    $(document).ready(async function() {
         getData();
 
         const calendarEl = document.querySelector('#fullcalendar');
         const calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth'
+            initialView: 'dayGridMonth',
+            themeSystem: 'bootstrap',
+            events: await getData(),
+            dateClick: function(info){
+                console.log(info);
+                $('#modalEdit').modal('show');
+                $('#Tanggal_Mulai').val(info.dateStr);
+                $('#Tanggal_Akhir').val(info.dateStr);
+            },
+            eventClick: function(info){
+                
+            }
         });
         calendar.render();
+
+        $.ajax({
+            url: "<?= site_url() ?>" + "/transaksi/kegiatan/getCombo",
+            type: 'POST',
+            dataType: 'JSON',
+            data: {
+                type: 'warga'
+            },
+            success: function(data){
+                $.each(data, function(key, val){
+                    $('#Peserta').append(`<option value="${val.combo_key}">${val.combo_name}</option>`);
+                });
+            }
+        });
+
+        let isSelected = false;
+        $('#select_toggle').on('click', function(){
+            isSelected = !isSelected;
+
+            $('#Peserta option').prop('selected', isSelected);
+        });
+
+        $('#startdate').datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+
+        $('#enddate').datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
 
         $('#btn_add').on('click', function(){
             $('#frm_header')[0].reset();
