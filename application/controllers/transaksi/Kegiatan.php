@@ -24,14 +24,11 @@ class Kegiatan extends CI_Controller {
         if($this->input->is_ajax_request()){
             $data = [
                 'Judul_Kegiatan' => $this->input->post('Judul_Kegiatan'),
-                'Nama' => $this->input->post('nama'),
-                'Alamat_KTP' => $this->input->post('Alamat_KTP'),
-                'No_Telp' => $this->input->post('No_Telp'),
-                'No_BPJS' => $this->input->post('No_BPJS'),
-                'No_NPWP' => $this->input->post('No_NPWP'),
-                'Tanggal_Lahir' => $this->input->post('Tanggal_Lahir'),
-                'Alamat_Domisili' => $this->input->post('Alamat_Domisili'),
-                'No_KK' => $this->input->post('No_KK')
+                'Deskripsi_Kegiatan' => $this->input->post('Deskripsi_Kegiatan'),
+                'Tanggal_Mulai' => $this->input->post('Tanggal_Mulai'),
+                'Tanggal_Akhir' => $this->input->post('Tanggal_Akhir'),
+                'Lokasi' => $this->input->post('Lokasi'),
+                'Deskripsi_Lokasi' => $this->input->post('Deskripsi_Lokasi'),
             ];
 
             if(trim($this->input->post('id')) === ""){
