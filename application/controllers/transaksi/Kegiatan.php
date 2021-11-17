@@ -51,7 +51,7 @@ class Kegiatan extends CI_Controller {
 
     public function getKegiatanDetail($prm_id = ''){
         if($this->input->is_ajax_request()){
-            $data = $this->M_kegiatan->get_warga_detail($prm_id);
+            $data = $this->M_kegiatan->get_kegiatan_detail($prm_id);
 
             echo json_encode($data);
         }
@@ -78,6 +78,13 @@ class Kegiatan extends CI_Controller {
                                     Nama as combo_name
                                     from warga";
                 break;
+
+                case 'bantuan':
+                    $strQuery = "select
+                                    id as combo_key,
+                                    Nama_Bantuan as combo_name
+                                    from bantuan";
+                    break;
             }
 
             $query = $this->db->query($strQuery);

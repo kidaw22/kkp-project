@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 17, 2021 at 03:38 PM
+-- Generation Time: Nov 17, 2021 at 05:35 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -51,13 +51,20 @@ INSERT INTO `bantuan` (`id`, `Nama_Bantuan`, `Periode_Dari`, `Periode_Sampai`) V
 
 CREATE TABLE `kegiatan` (
   `id` bigint(20) NOT NULL,
-  `Judul_Kegiatan` varchar(50) NOT NULL,
+  `Judul_Kegiatan` bigint(50) NOT NULL,
   `Deskripsi_Kegiatan` text DEFAULT NULL,
   `Tanggal_Mulai` timestamp NULL DEFAULT NULL,
   `Tanggal_Akhir` timestamp NULL DEFAULT NULL,
   `Lokasi` varchar(50) NOT NULL,
   `Deskripsi_Lokasi` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `kegiatan`
+--
+
+INSERT INTO `kegiatan` (`id`, `Judul_Kegiatan`, `Deskripsi_Kegiatan`, `Tanggal_Mulai`, `Tanggal_Akhir`, `Lokasi`, `Deskripsi_Lokasi`) VALUES
+(1, 1, 'testingn untuk data sample', '2021-11-01 03:00:00', '2021-11-01 05:00:00', 'HO', 'sample lokai');
 
 -- --------------------------------------------------------
 
@@ -70,6 +77,14 @@ CREATE TABLE `kegiatan_peserta` (
   `Kegiatan_id` bigint(20) NOT NULL,
   `Warga_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `kegiatan_peserta`
+--
+
+INSERT INTO `kegiatan_peserta` (`id`, `Kegiatan_id`, `Warga_id`) VALUES
+(7, 1, 1),
+(8, 1, 7);
 
 -- --------------------------------------------------------
 
@@ -114,7 +129,8 @@ ALTER TABLE `bantuan`
 -- Indexes for table `kegiatan`
 --
 ALTER TABLE `kegiatan`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `Judul_Kegiatan` (`Judul_Kegiatan`) USING BTREE;
 
 --
 -- Indexes for table `kegiatan_peserta`
@@ -144,13 +160,13 @@ ALTER TABLE `bantuan`
 -- AUTO_INCREMENT for table `kegiatan`
 --
 ALTER TABLE `kegiatan`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `kegiatan_peserta`
 --
 ALTER TABLE `kegiatan_peserta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `warga`
@@ -161,6 +177,12 @@ ALTER TABLE `warga`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `kegiatan`
+--
+ALTER TABLE `kegiatan`
+  ADD CONSTRAINT `kegiatan_ibfk_1` FOREIGN KEY (`Judul_Kegiatan`) REFERENCES `bantuan` (`id`);
 
 --
 -- Constraints for table `kegiatan_peserta`

@@ -21,7 +21,9 @@
                     <div class="form-group">
                         <label class="col-form-label"> Judul Kegiatan </label>
                         <input type="hidden" name="id" id="id">
-                        <input type="text" name="Judul_Kegiatan" id="Judul_Kegiatan" class="form-control" required>
+                        <select type="text" name="Judul_Kegiatan" id="Judul_Kegiatan" class="form-control" required>
+
+                        </select>
                     </div>
 
                     <div class="form-group">
@@ -99,17 +101,22 @@
             type: 'POST',
             dataType: 'JSON',
             success: function(data){
-                console.log(data);
+                // console.log(data);
                 $('#id').val(data.id);
-                $('#nik').val(data.NIK);
-                $('#nama').val(data.Nama);
-                $('#Alamat_KTP').val(data.Alamat_KTP);
-                $('#No_Telp').val(data.No_Telp);
-                $('#No_BPJS').val(data.No_BPJS);
-                $('#No_NPWP').val(data.No_NPWP);
-                $('#Tanggal_Lahir').val(data.Tanggal_Lahir);
-                $('#Alamat_Domisili').val(data.Alamat_Domisili);
-                $('#No_KK').val(data.No_KK);
+                $('#Judul_Kegiatan').val(data.Judul_Kegiatan);
+                $('#Deskripsi_Kegiatan').val(data.Deskripsi_Kegiatan);
+                $('#Lokasi').val(data.Lokasi);
+                $('#Deskripsi_Lokasi').val(data.Deskripsi_Lokasi);
+                $('#Tanggal_Mulai').val(data.Tanggal_Mulai);
+                $('#Tanggal_Akhir').val(data.Tanggal_Akhir);
+                
+                if(data.detail.length > 0){
+                    $.each(data.detail, function(key, val){
+                        $('#Peserta').find(`option[value="${val.Warga_id}"]`).prop('selected', true)
+                    });
+                }
+
+
             }
         });
     }
@@ -132,6 +139,20 @@
         })
     }
 
+    const showModal = (id = '', date) => {
+        $('#frm_header')[0].reset();
+        $('#id').val('');
+
+        $('#modalEdit').modal('show');
+
+        $('#Tanggal_Mulai').val(date);
+        $('#Tanggal_Akhir').val(date);
+
+        if(id !== ''){
+            getDetail(id);
+        }
+    }
+
     $(document).ready(async function() {
         getData();
 
@@ -140,30 +161,34 @@
             initialView: 'dayGridMonth',
             themeSystem: 'bootstrap',
             events: await getData(),
+            color: '#0984e3',
+            selectable: true,
+            selectHelper: true,
+            allDayDefault: true,
             dateClick: function(info){
-                console.log(info);
-                $('#modalEdit').modal('show');
-                $('#Tanggal_Mulai').val(info.dateStr);
-                $('#Tanggal_Akhir').val(info.dateStr);
+                showModal('', info.dateStr);
             },
             eventClick: function(info){
-                
+                showModal(info.event.id, info.event.start);
             }
         });
         calendar.render();
 
-        $.ajax({
+        loadCombo({
             url: "<?= site_url() ?>" + "/transaksi/kegiatan/getCombo",
-            type: 'POST',
-            dataType: 'JSON',
-            data: {
+            object: {
                 type: 'warga'
             },
-            success: function(data){
-                $.each(data, function(key, val){
-                    $('#Peserta').append(`<option value="${val.combo_key}">${val.combo_name}</option>`);
-                });
-            }
+            element: '#Peserta',
+            isReset: false
+        });
+
+        loadCombo({
+            url: "<?= site_url() ?>" + "/transaksi/kegiatan/getCombo",
+            object: {
+                type: 'bantuan'
+            },
+            element: '#Judul_Kegiatan'
         });
 
         let isSelected = false;
@@ -180,11 +205,6 @@
         $('#enddate').datetimepicker({
             format: 'YYYY-MM-DD'
         });
-
-        $('#btn_add').on('click', function(){
-            $('#frm_header')[0].reset();
-            $('#id').val('');
-        })
 
         $('#table_data tbody').on('click', '.item-edit', function(){
             const itemId = $(this).data('id');

@@ -59,3 +59,5 @@
 <script src="<?= site_url() ?>assets/jquery-validation/jquery.validate.min.js"></script>
 
 <script src="<?= site_url() ?>assets/sweetalert2/sweetalert2.all.min.js"></script>
+
+<script src="<?= site_url() ?>assets/js/main.js"></script>
