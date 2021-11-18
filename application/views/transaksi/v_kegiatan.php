@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="<?= site_url() ?>assets/fullcalendar/lib/main.min.css">
+<link rel="stylesheet" href="<?= site_url() ?>assets/icheck-bootstrap/icheck-bootstrap.min.css">
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -53,7 +54,7 @@
 
                     <div class="form-group">
                         <label class="col-form-label"> Peserta </label>
-                        <select name="Peserta" id="Peserta" class="form-control" required multiple>
+                        <select name="Peserta[]" id="Peserta" class="form-control" required multiple>
 
                         </select>
                     </div>
@@ -74,6 +75,14 @@
                         <input type="text" name="Deskripsi_Lokasi" id="Deskripsi_Lokasi" class="form-control" required>
                     </div>
 
+                    <div class="form-group clearfix" id="checkBoxDeleteSection" style="display: none">
+                        <div class="icheck-primary d-inline">
+                            <input type="checkbox" id="checkBoxDelete">
+                            <label for="checkBoxDelete">
+                                Hapus
+                            </label>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-outline-primary" data-dismiss="modal" aria-hidden="true">Batal</button>
@@ -140,6 +149,7 @@
     }
 
     const showModal = (id = '', date) => {
+        $('#checkBoxDeleteSection').hide();
         $('#frm_header')[0].reset();
         $('#id').val('');
 
@@ -149,6 +159,7 @@
         $('#Tanggal_Akhir').val(date);
 
         if (id !== '') {
+            $('#checkBoxDeleteSection').show();
             getDetail(id);
         }
     }
@@ -206,31 +217,27 @@
             format: 'YYYY-MM-DD'
         });
 
-        $('#table_data tbody').on('click', '.item-edit', function() {
-            const itemId = $(this).data('id');
+        $('#checkBoxDelete').on('change', function() {
+            if ($('#checkBoxDelete:checked').length > 0) {
+                Swal.fire({
+                    title: 'Apakah anda yakin?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'OK',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        deleteData($('#id').val());
+                    } else {
+                        $('#checkBoxDelete').prop('checked', false);
+                    }
+                })
+            } else {
 
-            $('#modalEdit').modal('show');
-
-            getDetail(itemId);
-        });
-
-        $('#table_data tbody').on('click', '.item-delete', function() {
-            const itemId = $(this).data('id');
-
-            Swal.fire({
-                title: 'Apakah anda yakin?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'OK',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    deleteData(itemId);
-                }
-            })
-        });
+            }
+        })
 
         $('#btn_modal_save').on('click', function(e) {
             $('#frm_header').validate({
@@ -247,9 +254,14 @@
                                 Swal.fire({
                                     icon: 'success',
                                     title: data.message
-                                }).then(() => {
+                                }).then(async () => {
+                                    const events = await getData();
+
+                                    calendar.removeEvents((e) => !e.isUserCreated);
+                                    calendar.addEventSource(events);
+                                    calendar.refetchEvents();
+
                                     $('#modalEdit').modal('hide');
-                                    getData();
                                 });
                             } else {
                                 Swal.fire({

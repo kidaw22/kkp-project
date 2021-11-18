@@ -1,27 +1,27 @@
 <title>AdminLTE 3 | Dashboard</title>
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?= site_url() ?>assets/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Tempusdominus Bootstrap 4 -->
-  <link rel="stylesheet" href="<?= site_url() ?>assets/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="<?= site_url() ?>assets/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- JQVMap -->
-  <link rel="stylesheet" href="<?= site_url() ?>assets/jqvmap/jqvmap.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="<?= site_url() ?>assets/adminlte/css/adminlte.min.css">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="<?= site_url() ?>assets/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="<?= site_url() ?>assets/daterangepicker/daterangepicker.css">
-  <!-- summernote -->
-  <link rel="stylesheet" href="<?= site_url() ?>assets/summernote/summernote-bs4.min.css">
-  <link rel="stylesheet" href="<?= site_url() ?>assets/sweetalert2/sweetalert2.min.css">
-  <!-- jQuery -->
+<!-- Google Font: Source Sans Pro -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="<?= site_url() ?>assets/fontawesome-free/css/all.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- Tempusdominus Bootstrap 4 -->
+<link rel="stylesheet" href="<?= site_url() ?>assets/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+<!-- iCheck -->
+<link rel="stylesheet" href="<?= site_url() ?>assets/icheck-bootstrap/icheck-bootstrap.min.css">
+<!-- JQVMap -->
+<link rel="stylesheet" href="<?= site_url() ?>assets/jqvmap/jqvmap.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="<?= site_url() ?>assets/adminlte/css/adminlte.min.css">
+<!-- overlayScrollbars -->
+<link rel="stylesheet" href="<?= site_url() ?>assets/overlayScrollbars/css/OverlayScrollbars.min.css">
+<!-- Daterange picker -->
+<link rel="stylesheet" href="<?= site_url() ?>assets/daterangepicker/daterangepicker.css">
+<!-- summernote -->
+<link rel="stylesheet" href="<?= site_url() ?>assets/summernote/summernote-bs4.min.css">
+<link rel="stylesheet" href="<?= site_url() ?>assets/sweetalert2/sweetalert2.min.css">
+<!-- jQuery -->
 <script src="<?= site_url() ?>assets/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="<?= site_url() ?>assets/jquery-ui/jquery-ui.min.js"></script>
@@ -33,8 +33,6 @@
 <script src="<?= site_url() ?>assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- ChartJS -->
 <script src="<?= site_url() ?>assets/chart.js/Chart.min.js"></script>
-<!-- Sparkline -->
-<script src="<?= site_url() ?>assets/sparklines/sparkline.js"></script>
 <!-- JQVMap -->
 <script src="<?= site_url() ?>assets/jqvmap/jquery.vmap.min.js"></script>
 <script src="<?= site_url() ?>assets/jqvmap/maps/jquery.vmap.usa.js"></script>
@@ -51,10 +49,6 @@
 <script src="<?= site_url() ?>assets/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?= site_url() ?>assets/adminlte/js/adminlte.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?= site_url() ?>assets/adminlte/js/demo.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<?= site_url() ?>assets/adminlte/js/pages/dashboard.js"></script>
 
 <script src="<?= site_url() ?>assets/jquery-validation/jquery.validate.min.js"></script>
 
