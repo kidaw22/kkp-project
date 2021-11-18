@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Login extends CI_Controller {
+class Login extends CI_Controller
+{
 
 	/**
 	 * Index Page for this controller.
@@ -20,8 +21,8 @@ class Login extends CI_Controller {
 	 */
 	public function index()
 	{
-        $data['breadcrumb'] = 'Dashboard';
-        $data['content'] = 'dashboard';
-		$this->template->display('dashboard',$data);
+		$data['breadcrumb'] = 'Dashboard';
+		$data['content'] = 'v_login';
+		$this->load->view('v_login', $data);
 	}
 }
