@@ -130,7 +130,7 @@
         });
     }
 
-    const deleteData = id => {
+    const deleteData = (id, calendar) => {
         $.ajax({
             url: "<?= site_url() ?>transaksi/kegiatan/deleteKegiatan/" + id,
             type: 'POST',
@@ -140,8 +140,18 @@
                     Swal.fire({
                         title: data.message,
                         icon: 'success'
-                    }).then(() => {
-                        getData();
+                    }).then(async () => {
+                        const events = await getData();
+                        const currentEvents = calendar.getEventSources();
+
+                        currentEvents.forEach(event => {
+                            event.remove();
+                        });
+
+                        calendar.addEventSource(events);
+                        calendar.refetchEvents();
+
+                        $('#modalEdit').modal('hide');
                     })
                 }
             }
@@ -229,7 +239,7 @@
                     cancelButtonText: 'Batal'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        deleteData($('#id').val());
+                        deleteData($('#id').val(), calendar);
                     } else {
                         $('#checkBoxDelete').prop('checked', false);
                     }
@@ -256,8 +266,12 @@
                                     title: data.message
                                 }).then(async () => {
                                     const events = await getData();
+                                    const currentEvents = calendar.getEventSources();
 
-                                    calendar.removeEvents((e) => !e.isUserCreated);
+                                    currentEvents.forEach(event => {
+                                        event.remove();
+                                    });
+
                                     calendar.addEventSource(events);
                                     calendar.refetchEvents();
 
