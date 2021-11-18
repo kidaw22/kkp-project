@@ -33,35 +33,37 @@
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
       <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-      <li class="nav-item">
-        <a href="#" class="nav-link">
-          <i class="nav-icon fas fa-cogs"></i>
-          <p>
-            Master Data
-            <i class="right fas fa-angle-left"></i>
-          </p>
-        </a>
-        <ul class="nav nav-treeview">
-          <li class="nav-item">
-            <a href="<?= site_url() ?>master_data/warga" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Warga</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?= site_url() ?>master_data/bantuan" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Bantuan</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="./index3.html" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Pengumuman</p>
-            </a>
-          </li>
-        </ul>
-      </li>
+      <?php if ((int)$this->session->userdata('usertype') === 1) { ?>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-cogs"></i>
+            <p>
+              Master Data
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="<?= site_url() ?>master_data/warga" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Warga</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?= site_url() ?>master_data/bantuan" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Bantuan</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./index3.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Pengumuman</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+      <?php } ?>
       <li class="nav-item">
         <a href="#" class="nav-link">
           <i class="nav-icon fas fa-edit"></i>
