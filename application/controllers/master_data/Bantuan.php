@@ -3,6 +3,8 @@ class Bantuan extends CI_Controller {
     public function __construct(){
         parent::__construct();
         $this->load->model('master_data/M_bantuan');
+
+        $this->M_login->session_check();
     }
 
     public function index()
@@ -61,4 +63,3 @@ class Bantuan extends CI_Controller {
         }
     }
 }
-?>

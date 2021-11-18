@@ -5,6 +5,8 @@ class Kegiatan extends CI_Controller
     {
         parent::__construct();
         $this->load->model('transaksi/M_kegiatan');
+
+        $this->M_login->session_check();
     }
 
     public function index()

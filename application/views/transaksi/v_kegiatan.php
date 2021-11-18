@@ -175,8 +175,6 @@
     }
 
     $(document).ready(async function() {
-        getData();
-
         const calendarEl = document.querySelector('#fullcalendar');
         const calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',

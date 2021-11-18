@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="<?= site_url() ?>assets/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?= site_url() ?>assets/adminlte/css/adminlte.min.css">
+
+    <link rel="stylesheet" href="<?= site_url() ?>assets/sweetalert2/sweetalert2.min.css">
 </head>
 
 <body class="hold-transition login-page">
@@ -26,29 +28,15 @@
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Masuk untuk memulai sesi anda</p>
 
-                <form method="post">
-                    <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Email">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
-                            </div>
-                        </div>
+                <form method="post" id="frm_login">
+                    <div class="form-group">
+                        <input type="text" name="nik" class="form-control" placeholder="NIK" required>
                     </div>
-                    <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Kata Sandi">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
+                    <div class="form-group">
+                        <input type="password" name="password" class="form-control" placeholder="Kata Sandi" required>
                     </div>
-                    <div class="row">
-                        <!-- /.col -->
-                        <div class="col-12">
-                            <button type="button" id="btn_login" class="btn btn-primary btn-block">Masuk</button>
-                        </div>
-                        <!-- /.col -->
+                    <div class="form-group">
+                        <button type="submit" id="btn_login" class="btn btn-primary btn-block">Masuk</button>
                     </div>
                 </form>
             </div>
@@ -64,10 +52,40 @@
     <!-- AdminLTE App -->
     <script src="<?= site_url() ?>assets/adminlte/js/adminlte.min.js"></script>
 
+    <script src="<?= site_url() ?>assets/jquery-validation/jquery.validate.min.js"></script>
+
+    <script src="<?= site_url() ?>assets/sweetalert2/sweetalert2.all.min.js"></script>
+
     <script>
         $(document).ready(function() {
-            $('#btn_login').on('click', function() {
-                window.location.replace("<?= site_url() ?>dashboard")
+            $('#btn_login').on('click', function(e) {
+                $('#frm_login').validate({
+                    submitHandler: function() {
+                        e.preventDefault();
+
+                        $.ajax({
+                            url: "<?= site_url() ?>login/check",
+                            type: 'POST',
+                            dataType: 'JSON',
+                            data: $('#frm_login').serialize(),
+                            success: function(data) {
+                                if (data.status === 'success') {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: data.message
+                                    }).then(() => {
+                                        window.location.replace("<?= site_url() ?>dashboard")
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        icon: 'warning',
+                                        title: data.message
+                                    });
+                                }
+                            }
+                        });
+                    }
+                });
             });
         });
     </script>
