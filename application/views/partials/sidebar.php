@@ -74,10 +74,12 @@
         </a>
         <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="<?= site_url() ?>transaksi/kegiatan" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Daftar Kegiatan</p>
-            </a>
+            <?php if ((int)$this->session->userdata('usertype') === 1) { ?>
+              <a href="<?= site_url() ?>transaksi/kegiatan" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Daftar Kegiatan</p>
+              </a>
+            <?php } ?>
           </li>
           <li class="nav-item">
             <a href="<?= site_url() ?>master_data/bantuan" class="nav-link">
@@ -87,23 +89,25 @@
           </li>
         </ul>
       </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link">
-          <i class="nav-icon fas fa-flag"></i>
-          <p>
-            Laporan
-            <i class="right fas fa-angle-left"></i>
-          </p>
-        </a>
-        <ul class="nav nav-treeview">
-          <li class="nav-item">
-            <a href="<?= site_url() ?>master_data/warga" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Laporan Bantuan</p>
-            </a>
-          </li>
-        </ul>
-      </li>
+      <?php if ((int)$this->session->userdata('usertype') === 1) { ?>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-flag"></i>
+            <p>
+              Laporan
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="<?= site_url() ?>master_data/warga" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Laporan Bantuan</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+      <?php } ?>
       <li class="nav-item">
         <a href="<?= site_url('login/logout') ?>" class="nav-link">
           <i class="nav-icon fas fa-power-off"></i>
