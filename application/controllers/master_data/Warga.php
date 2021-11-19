@@ -31,7 +31,8 @@ class Warga extends CI_Controller {
                 'No_NPWP' => $this->input->post('No_NPWP'),
                 'Tanggal_Lahir' => $this->input->post('Tanggal_Lahir'),
                 'Alamat_Domisili' => $this->input->post('Alamat_Domisili'),
-                'No_KK' => $this->input->post('No_KK')
+                'No_KK' => $this->input->post('No_KK'),
+                'usertype' => $this->input->post('checkBoxAdmin')
             ];
 
             if(trim($this->input->post('id')) === ""){
@@ -67,4 +68,3 @@ class Warga extends CI_Controller {
         }
     }
 }
-?>

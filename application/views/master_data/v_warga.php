@@ -76,6 +76,15 @@
                         <input type="text" name="No_KK" id="No_KK" class="form-control" required>
                     </div>
 
+                    <div class="form-group clearfix">
+                        <div class="icheck-primary d-inline">
+                            <input type="checkbox" id="checkBoxAdmin">
+                            <input type="hidden" name="checkBoxAdmin" id="checkBoxAdminHidden">
+                            <label for="checkBoxAdmin">
+                                Admin
+                            </label>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-outline-primary" data-dismiss="modal" aria-hidden="true">Batal</button>
@@ -110,13 +119,13 @@
         })
 
     }
-    
+
     const getDetail = id => {
         $.ajax({
-            url: "<?= site_url() ?>master_data/warga/getWargaDetail/"+id,
+            url: "<?= site_url() ?>master_data/warga/getWargaDetail/" + id,
             type: 'POST',
             dataType: 'JSON',
-            success: function(data){
+            success: function(data) {
                 console.log(data);
                 $('#id').val(data.id);
                 $('#nik').val(data.NIK);
@@ -128,17 +137,23 @@
                 $('#Tanggal_Lahir').val(data.Tanggal_Lahir);
                 $('#Alamat_Domisili').val(data.Alamat_Domisili);
                 $('#No_KK').val(data.No_KK);
+                $('#checkBoxAdminHidden').val(data.usertype);
+                if (parseInt(data.usertype) === 1) {
+                    $('#checkBoxAdmin').prop('checked', true);
+                } else {
+                    $('#checkBoxAdmin').prop('checked', false);
+                }
             }
         });
     }
 
     const deleteData = id => {
         $.ajax({
-            url: "<?= site_url() ?>master_data/warga/deleteWarga/"+id,
+            url: "<?= site_url() ?>master_data/warga/deleteWarga/" + id,
             type: 'POST',
             dataType: 'JSON',
-            success: function(data){
-                if(data.status === 'success'){
+            success: function(data) {
+                if (data.status === 'success') {
                     Swal.fire({
                         title: data.message,
                         icon: 'success'
@@ -153,20 +168,20 @@
     $(document).ready(function() {
         getData();
 
-        $('#btn_add').on('click', function(){
+        $('#btn_add').on('click', function() {
             $('#frm_header')[0].reset();
             $('#id').val('');
         })
 
-        $('#table_data tbody').on('click', '.item-edit', function(){
+        $('#table_data tbody').on('click', '.item-edit', function() {
             const itemId = $(this).data('id');
-            
+
             $('#modalEdit').modal('show');
 
             getDetail(itemId);
         });
 
-        $('#table_data tbody').on('click', '.item-delete', function(){
+        $('#table_data tbody').on('click', '.item-delete', function() {
             const itemId = $(this).data('id');
 
             Swal.fire({
@@ -183,6 +198,14 @@
                 }
             })
         });
+
+        $('#checkBoxAdmin').on('change', function() {
+            if ($('#checkBoxAdmin:checked').length > 0) {
+                $('#checkBoxAdminHidden').val(1);
+            } else {
+                $('#checkBoxAdminHidden').val(0);
+            }
+        })
 
         $('#btn_modal_save').on('click', function(e) {
             $('#frm_header').validate({
