@@ -20,15 +20,14 @@
             <form class="form-horizontal" id="frm_header">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label class="col-form-label"> Judul Kegiatan </label>
+                        <label class="col-form-label"> Jenis Bantuan </label>
                         <input type="hidden" name="id" id="id">
                         <select type="text" name="Judul_Kegiatan" id="Judul_Kegiatan" class="form-control" required>
-
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-form-label"> Deskripsi Kegiatan </label>
+                        <label class="col-form-label"> Deskripsi Bantuan </label>
                         <input type="text" name="Deskripsi_Kegiatan" id="Deskripsi_Kegiatan" class="form-control" required>
                     </div>
 

@@ -37,28 +37,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-form-label"> Nama </label>
+                        <label class="col-form-label"> Nama Lengkap </label>
                         <input type="text" name="nama" id="nama" class="form-control" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-form-label"> Alamat KTP </label>
-                        <input type="text" name="Alamat_KTP" id="Alamat_KTP" class="form-control" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-form-label"> No.Telp </label>
-                        <input type="number" name="No_Telp" id="No_Telp" class="form-control" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-form-label"> No. BPJS </label>
-                        <input type="number" name="No_BPJS" id="No_BPJS" class="form-control" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-form-label"> No. NPWP </label>
-                        <input type="text" name="No_NPWP" id="No_NPWP" class="form-control" required>
                     </div>
 
                     <div class="form-group">
@@ -67,15 +47,44 @@
                     </div>
 
                     <div class="form-group">
+                        <label class="col-form-label"> Jenis Kelamin </label>
+                        <select type="text" name="Jenis_Kelamin" id="Jenis_Kelamin" class="form-control" required>
+                        <option> Pilih </option>
+                        <option>Laki-Laki</option>
+                        <option>Perempuan</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-form-label"> Alamat KTP </label>
+                        <input type="text" name="Alamat_KTP" id="Alamat_KTP" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
                         <label class="col-form-label"> Alamat Domisili </label>
                         <input type="text" name="Alamat_Domisili" id="Alamat_Domisili" class="form-control" required>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-form-label"> No. KK </label>
-                        <input type="text" name="No_KK" id="No_KK" class="form-control" required>
+                        <label class="col-form-label"> Jenis Pekerjaan </label>
+                        <input type="text" name="Jenis_Pekerjaan" id="Jenis_Pekerjaan" class="form-control" required>
                     </div>
 
+                    <div class="form-group">
+                        <label class="col-form-label"> Nomor Telepon </label>
+                        <input type="number" name="No_Telp" id="No_Telp" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-form-label"> Nomor KK </label>
+                        <input type="number" name="No_KK" id="No_KK" class="form-control" required>
+                    </div>
+                   
+                    <div class="form-group">
+                        <label class="col-form-label"> Jumlah Tanggungan </label>
+                        <input type="number" name="Jumlah_Tanggungan" id="Jumlah_Tanggungan" class="form-control" required>
+                    </div>                    
+                   
                     <div class="form-group clearfix">
                         <div class="icheck-primary d-inline">
                             <input type="checkbox" id="checkBoxAdmin">
@@ -130,13 +139,14 @@
                 $('#id').val(data.id);
                 $('#nik').val(data.NIK);
                 $('#nama').val(data.Nama);
-                $('#Alamat_KTP').val(data.Alamat_KTP);
-                $('#No_Telp').val(data.No_Telp);
-                $('#No_BPJS').val(data.No_BPJS);
-                $('#No_NPWP').val(data.No_NPWP);
                 $('#Tanggal_Lahir').val(data.Tanggal_Lahir);
+                $('#Jenis_Kelamin').val(data.Jenis_Kelamin);
+                $('#Alamat_KTP').val(data.Alamat_KTP);
                 $('#Alamat_Domisili').val(data.Alamat_Domisili);
+                $('#Jenis_Pekerjaan').val(data.Jenis_Pekerjaan);
+                $('#No_Telp').val(data.No_Telp);
                 $('#No_KK').val(data.No_KK);
+                $('#Jumlah_Tanggungan').val(data.Jumlah_Tanggungan);                
                 $('#checkBoxAdminHidden').val(data.usertype);
                 if (parseInt(data.usertype) === 1) {
                     $('#checkBoxAdmin').prop('checked', true);

@@ -1,6 +1,6 @@
 <!-- Brand Logo -->
 <a href="<?= site_url() ?>dashboard" class="brand-link">
-  <img src="<?= site_url() ?>assets/adminlte/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+  <img src="<?= site_url() ?>assets/adminlte/img/newlogo.jpeg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
   <span class="brand-text font-weight-light">BantuWarga</span>
 </a>
 
@@ -9,7 +9,7 @@
   <!-- Sidebar user panel (optional) -->
   <div class="user-panel mt-3 pb-3 mb-3 d-flex">
     <div class="image">
-      <img src="<?= site_url() ?>assets/adminlte/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+      <img src="<?= site_url() ?>assets/adminlte/img/ava.png" class="img-circle elevation-2" alt="User Image">
     </div>
     <div class="info">
       <a href="#" class="d-block"><?= $this->session->userdata('user_name') ?></a>
@@ -77,7 +77,7 @@
             <?php if ((int)$this->session->userdata('usertype') === 1) { ?>
               <a href="<?= site_url() ?>transaksi/kegiatan" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Daftar Kegiatan</p>
+                <p>Jadwal Bantuan</p>
               </a>
             <?php } ?>
           </li>

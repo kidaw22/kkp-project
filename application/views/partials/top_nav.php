@@ -10,7 +10,7 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Navbar Search -->
-      <li class="nav-item">
+      <!--<li class="nav-item">
         <a class="nav-link" data-widget="navbar-search" href="#" role="button">
           <i class="fas fa-search"></i>
         </a>
@@ -32,7 +32,7 @@
       </li>
 
       <!-- Messages Dropdown Menu -->
-      <li class="nav-item dropdown">
+      <!--<li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-comments"></i>
           <span class="badge badge-danger navbar-badge">3</span>
@@ -40,7 +40,7 @@
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
-            <div class="media">
+            <!--<div class="media">
               <img src="<?= site_url() ?>assets/adminlte/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
@@ -52,11 +52,11 @@
               </div>
             </div>
             <!-- Message End -->
-          </a>
+          <!--</a>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
-            <div class="media">
+            <!--<div class="media">
               <img src="<?= site_url() ?>assets/adminlte/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
@@ -68,11 +68,11 @@
               </div>
             </div>
             <!-- Message End -->
-          </a>
+          <!--</a>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
-            <div class="media">
+            <!--<div class="media">
               <img src="<?= site_url() ?>assets/adminlte/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
@@ -84,7 +84,7 @@
               </div>
             </div>
             <!-- Message End -->
-          </a>
+          <!--</a>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
         </div>

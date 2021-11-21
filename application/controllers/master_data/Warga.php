@@ -25,13 +25,14 @@ class Warga extends CI_Controller {
             $data = [
                 'NIK' => $this->input->post('nik'),
                 'Nama' => $this->input->post('nama'),
-                'Alamat_KTP' => $this->input->post('Alamat_KTP'),
-                'No_Telp' => $this->input->post('No_Telp'),
-                'No_BPJS' => $this->input->post('No_BPJS'),
-                'No_NPWP' => $this->input->post('No_NPWP'),
                 'Tanggal_Lahir' => $this->input->post('Tanggal_Lahir'),
+                'Jenis_Kelamin' => $this->input->post('Jenis_Kelamin'),
+                'Alamat_KTP' => $this->input->post('Alamat_KTP'),
                 'Alamat_Domisili' => $this->input->post('Alamat_Domisili'),
+                'Jenis_Pekerjaan' => $this->input->post('Jenis_Pekerjaan'),
+                'No_Telp' => $this->input->post('No_Telp'),                                                               
                 'No_KK' => $this->input->post('No_KK'),
+                'Jumlah_Tanggungan' => $this->input->post('Jumlah_Tanggungan'),
                 'usertype' => $this->input->post('checkBoxAdmin')
             ];
 
