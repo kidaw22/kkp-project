@@ -82,9 +82,9 @@
             <?php } ?>
           </li>
           <li class="nav-item">
-            <a href="<?= site_url() ?>master_data/bantuan" class="nav-link">
+            <a href="<?= site_url() ?>transaksi/pengajuan" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
-              <p> Pengajuan Warga</p>
+              <p> Pengajuan Bantuan</p>
             </a>
           </li>
         </ul>
