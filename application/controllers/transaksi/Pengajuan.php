@@ -57,7 +57,7 @@ class Pengajuan extends CI_Controller
 
             $this->db->insert_batch('pengajuan_inbox', $inbox);
 
-            $return_value = array('status' => 'success', 'message' => "Sukses menambahkan data!");
+            $return_value = array('status' => 'success', 'message' => "Pengajuan Anda Akan Di Proses!");
 
             echo json_encode($return_value);
         }
