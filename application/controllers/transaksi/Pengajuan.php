@@ -40,7 +40,9 @@ class Pengajuan extends CI_Controller
                 'no_kk' => $this->input->post('no_kk'),
                 'jumlah_tanggungan' => $this->input->post('jumlah_tanggungan'),
                 'jumlah_kendaraan' => $this->input->post('jumlah_kendaraan'),
-                'tanggal_dibuat' => date('Y-m-d')
+                'warga_id' => $this->input->post('warga_id'),
+                'tanggal_dibuat' => date('Y-m-d'),
+                'created_by' => $this->session->userdata('user_id')
             ];
 
             $this->db->insert('pengajuan', $data);
@@ -98,6 +100,24 @@ class Pengajuan extends CI_Controller
 
             $query = $this->db->query($strQuery);
             $return_value = $query->result_array();
+
+            echo json_encode($return_value);
+        }
+    }
+
+    public function getWarga($prm_nik = ''){
+        if($this->input->is_ajax_request()){
+            $strQuery = "SELECT id,
+                                Nama,
+                                jenis_kelamin,
+                                tanggal_lahir,
+                                alamat_KTP,
+                                No_KK
+                                from warga
+                                where NIK = $prm_nik";
+
+            $query = $this->db->query($strQuery);
+            $return_value = $query->row();
 
             echo json_encode($return_value);
         }

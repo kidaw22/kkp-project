@@ -15,52 +15,49 @@
       </div>
 
       <div class="form-group">
-        <label> Nama Lengkap </label>
-        <input type="text" name="nama_lengkap" id="nama_lengkap" class="form-control" required>
+        <label>Nomor KTP</label>
+        <input type="text" name="no_ktp" id="no_ktp" class="form-control numeric" maxlength="16">
+        <input type="hidden" name="warga_id" id="warga_id" class="form-control">
       </div>
 
       <div class="form-group">
-        <label>Nomor KTP</label>
-        <input type="text" name="no_ktp" id="no_ktp" class="form-control numeric" maxlength="16">
+        <label> Nama Lengkap </label>
+        <input type="text" name="nama_lengkap" id="nama_lengkap" class="form-control" required readonly>
       </div>
   
       <div class="form-group">
         <label>Tanggal Lahir</label>
-        <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control" required>
+        <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control" required readonly>
       </div>
 
       <div class="form-group">
         <label>Jenis Kelamin</label>
-        <select name="jenis_kelamin" id="jenis_kelamin" class="form-control" required>
-          <option> --pilih-- </option>
-          <option>Laki-Laki</option>
-          <option>Perempuan</option>
-        </select>
+        <input type="text" name="jenis_kelamin" id="jenis_kelamin" class="form-control" readonly required>
       </div>
 
       <div class="form-group">
         <label>Alamat KTP</label>
-        <textarea name="alamat_ktp" id="alamat_ktp" class="form-control" row="3" required></textarea>
+        <textarea name="alamat_ktp" id="alamat_ktp" class="form-control" row="3" required readonly></textarea>
       </div>
 
       <div class="form-group">
-        <label>Alamat Domisili</label>
-        <textarea name="alamat_domisili" id="alamat_domisili" class="form-control" row="3" required></textarea>
+        <label>Nomor KK</label>
+        <input type="text" name="no_kk" id="no_kk" class="form-control numeric" maxlength="16" required readonly>
       </div>
 
       <div class="form-group">
         <label>Status Tempat Tinggal</label>
         <select name="status_tempat_tinggal" id="status_tempat_tinggal" class="form-control" required>
-          <option> --pilih-- </option>
-          <option> Milik Sendiri </option>
-          <option> Milik Orangtua </option>
-          <option> Sewa </option>
+          <option value=""> - choose - </option>
+          <option value="Milik Sendiri"> Milik Sendiri </option>
+          <option value="Milik Orangtua"> Milik Orangtua </option>
+          <option value="Sewa"> Sewa </option>
         </select>
       </div>
 
       <div class="form-group">
-        <label>Nomor KK</label>
-        <input type="text" name="no_kk" id="no_kk" class="form-control numeric" maxlength="16" required>
+        <label>Alamat Domisili</label>
+        <textarea name="alamat_domisili" id="alamat_domisili" class="form-control" row="3" required></textarea>
       </div>
 
       <div class="form-group">
@@ -96,13 +93,39 @@
       element: '#jenis_bantuan'
     });
 
+    $('#no_ktp').on('input', function(){
+      if($(this).val().length === 16){
+        $.ajax({
+          url: "<?= site_url() ?>" + "transaksi/pengajuan/getWarga/"+$(this).val(),
+          type: 'POST',
+          dataType: 'JSON',
+          success: function(data){
+            if(data === null){
+              Swal.fire({
+                title: "NIK belum terdaftar!",
+                timer: 3000,
+                showConfirmButton: false
+              })
+            }else{
+              $('#warga_id').val(data.id);
+              $('#nama_lengkap').val(data.Nama);
+              $('#tanggal_lahir').val(data.tanggal_lahir);
+              $('#jenis_kelamin').val(data.jenis_kelamin);
+              $('#alamat_ktp').val(data.alamat_KTP);
+              $('#no_kk').val(data.No_KK);
+            }
+          }
+        });
+      }
+    });
+
     $('#btn_save').on('click', function(e){
       $('#frm_pengajuan').validate({
         submitHandler: function(){
           e.preventDefault()
 
           $.ajax({
-            url: "<?= site_url() ?>" + "/transaksi/pengajuan/savePengajuan",
+            url: "<?= site_url() ?>" + "transaksi/pengajuan/savePengajuan",
             type: 'POST',
             dataType: 'JSON',
             data: $('#frm_pengajuan').serialize(),

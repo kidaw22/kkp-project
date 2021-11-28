@@ -10,6 +10,7 @@
                         <th> Jumlah Tanggungan </th>
                         <th> Jumlah Kendaraan </th>
                         <th> Status </th>
+                        <th> Disetujui Oleh </th>
                     </tr>
                 </thead>
 
@@ -32,16 +33,17 @@
                 if (data.length) {
                     for (let i = 0; i < data.length; i++) {
                         html += `<tr>` +
-                            `<td><a href="javascript:void(0)" data-id="${data[i].id}">${data[i].nama_lengkap}</a></td>` +
+                            `<td><a href="${"<?= site_url() ?>transaksi/pengajuan_inbox/form/"+data[i].id}">${data[i].nama_lengkap}</a></td>` +
                             `<td>${data[i].no_ktp}</td>` +
                             `<td>${data[i].bantuan}</td>` +
                             `<td>${data[i].jumlah_tanggungan}</td>` +
                             `<td>${data[i].jumlah_kendaraan}</td>` +
                             `<td>${data[i].status}</td>` +
+                            `<td>${data[i].approved_by}</td>` +
                             `</tr>`;
                     }
                 } else {
-                    html += `<tr><td colspan="5" class="text-center">Belum ada data.</td></tr>`;
+                    html += `<tr><td colspan="7" class="text-center">Belum ada data.</td></tr>`;
                 }
 
                 $('#show_data').html(html)
