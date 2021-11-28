@@ -21,6 +21,7 @@
 <!-- summernote -->
 <link rel="stylesheet" href="<?= site_url() ?>assets/summernote/summernote-bs4.min.css">
 <link rel="stylesheet" href="<?= site_url() ?>assets/sweetalert2/sweetalert2.min.css">
+<link rel="stylesheet" href="<?= site_url() ?>assets/datatables-bs4/css/dataTables.bootstrap4.min.css">
 <!-- jQuery -->
 <script src="<?= site_url() ?>assets/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -55,3 +56,6 @@
 <script src="<?= site_url() ?>assets/sweetalert2/sweetalert2.all.min.js"></script>
 
 <script src="<?= site_url() ?>assets/js/main.js"></script>
+
+<script src="<?= site_url() ?>assets/datatables/jquery.dataTables.min.js"></script>
+<script src="<?= site_url() ?>assets/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>

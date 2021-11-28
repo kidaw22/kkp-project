@@ -40,7 +40,7 @@ class Pengajuan extends CI_Controller
                 'no_kk' => $this->input->post('no_kk'),
                 'jumlah_tanggungan' => $this->input->post('jumlah_tanggungan'),
                 'jumlah_kendaraan' => $this->input->post('jumlah_kendaraan'),
-                'Tanggal_Dibuat' => date('Y-m-d')
+                'tanggal_dibuat' => date('Y-m-d')
             ];
 
             $this->db->insert('pengajuan', $data);
@@ -48,7 +48,7 @@ class Pengajuan extends CI_Controller
 
             $get_admin = $this->db->query("SELECT id from warga where usertype = 1");
 
-            foreach($get_admin->result() as $row){
+            foreach ($get_admin->result() as $row) {
                 $inbox[] = [
                     'Pengajuan_Id' => $header['ID'],
                     'Approver_Id' => $row->id
@@ -85,14 +85,15 @@ class Pengajuan extends CI_Controller
         }
     }
 
-    public function getCombo(){
-        if($this->input->is_ajax_request()){
-            switch($this->input->post('type')){
+    public function getCombo()
+    {
+        if ($this->input->is_ajax_request()) {
+            switch ($this->input->post('type')) {
                 case 'bantuan':
                     $strQuery = "SELECT id as combo_key,
                                         Nama_Bantuan as combo_name
                                         from bantuan";
-                break;
+                    break;
             }
 
             $query = $this->db->query($strQuery);
