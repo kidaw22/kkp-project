@@ -28,3 +28,5 @@ create table notifikasi(
     on update no action
     on delete no action
 )
+
+ALTER TABLE `pengajuan` CHANGE `no_ktp` `no_ktp` BIGINT(16) NOT NULL; 

@@ -55,12 +55,6 @@
                 <p>Bantuan</p>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="./index3.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Pengumuman</p>
-              </a>
-            </li>
           </ul>
         </li>
       <?php } ?>
@@ -88,11 +82,17 @@
             </a>
           </li>
           <li class="nav-item">
-              <a href="<?= site_url() ?>transaksi/pengajuan_inbox" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Kotak Masuk Pengajuan </p>
-              </a>
-            </li>
+            <a href="<?= site_url() ?>transaksi/pengajuan_inbox" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Kotak Masuk Pengajuan </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?= site_url() ?>transaksi/pengumuman" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Pengumuman</p>
+            </a>
+          </li>
         </ul>
       </li>
       <?php if ((int)$this->session->userdata('usertype') === 1) { ?>
