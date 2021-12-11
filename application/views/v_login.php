@@ -27,7 +27,7 @@
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg">Masuk untuk memulai sesi anda</p>
+                <p class="login-box-msg">Selamat Datang, silahkan masuk</p>
 
                 <form method="post" id="frm_login">
                     <div class="form-group">

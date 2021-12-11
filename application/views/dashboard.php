@@ -63,6 +63,33 @@
       </div>
       <!-- ./col -->
     </div>
+
+    <div class="row">
+      <section class="col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">
+              Notifikasi
+            </h3>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead class="bg-blue">
+                  <th style="width: 20px"> No </th>
+                  <th> Pesan </th>
+                </thead>
+
+                <tbody id="bodyNotification">
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
     <!-- /.row -->
     <!-- Main row -->
     <div class="row">
@@ -129,7 +156,7 @@
                   <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
                 </div>
                 <!-- /.direct-chat-infos -->
-                <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image">
+                <img class="direct-chat-img" src="<?= site_url() ?>assets/adminlte/img/user1-128x128.jpg" alt="message user image">
                 <!-- /.direct-chat-img -->
                 <div class="direct-chat-text">
                   Is this template really for free? That's unbelievable!
@@ -145,7 +172,7 @@
                   <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
                 </div>
                 <!-- /.direct-chat-infos -->
-                <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image">
+                <img class="direct-chat-img" src="<?= site_url() ?>assets/adminlte/img/user3-128x128.jpg" alt="message user image">
                 <!-- /.direct-chat-img -->
                 <div class="direct-chat-text">
                   You better believe it!
@@ -161,7 +188,7 @@
                   <span class="direct-chat-timestamp float-right">23 Jan 5:37 pm</span>
                 </div>
                 <!-- /.direct-chat-infos -->
-                <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image">
+                <img class="direct-chat-img" src="<?= site_url() ?>assets/adminlte/img/user1-128x128.jpg" alt="message user image">
                 <!-- /.direct-chat-img -->
                 <div class="direct-chat-text">
                   Working with AdminLTE on a great new app! Wanna join?
@@ -177,7 +204,7 @@
                   <span class="direct-chat-timestamp float-left">23 Jan 6:10 pm</span>
                 </div>
                 <!-- /.direct-chat-infos -->
-                <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image">
+                <img class="direct-chat-img" src="<?= site_url() ?>assets/adminlte/img/user3-128x128.jpg" alt="message user image">
                 <!-- /.direct-chat-img -->
                 <div class="direct-chat-text">
                   I would love to.
@@ -194,7 +221,7 @@
               <ul class="contacts-list">
                 <li>
                   <a href="#">
-                    <img class="contacts-list-img" src="dist/img/user1-128x128.jpg" alt="User Avatar">
+                    <img class="contacts-list-img" src="<?= site_url() ?>assets/adminlte/img/user1-128x128.jpg" alt="User Avatar">
 
                     <div class="contacts-list-info">
                       <span class="contacts-list-name">
@@ -209,7 +236,7 @@
                 <!-- End Contact Item -->
                 <li>
                   <a href="#">
-                    <img class="contacts-list-img" src="dist/img/user7-128x128.jpg" alt="User Avatar">
+                    <img class="contacts-list-img" src="<?= site_url() ?>assets/adminlte/img/user7-128x128.jpg" alt="User Avatar">
 
                     <div class="contacts-list-info">
                       <span class="contacts-list-name">
@@ -224,7 +251,7 @@
                 <!-- End Contact Item -->
                 <li>
                   <a href="#">
-                    <img class="contacts-list-img" src="dist/img/user3-128x128.jpg" alt="User Avatar">
+                    <img class="contacts-list-img" src="<?= site_url() ?>assets/adminlte/img/user3-128x128.jpg" alt="User Avatar">
 
                     <div class="contacts-list-info">
                       <span class="contacts-list-name">
@@ -239,7 +266,7 @@
                 <!-- End Contact Item -->
                 <li>
                   <a href="#">
-                    <img class="contacts-list-img" src="dist/img/user5-128x128.jpg" alt="User Avatar">
+                    <img class="contacts-list-img" src="<?= site_url() ?>assets/adminlte/img/user5-128x128.jpg" alt="User Avatar">
 
                     <div class="contacts-list-info">
                       <span class="contacts-list-name">
@@ -254,7 +281,7 @@
                 <!-- End Contact Item -->
                 <li>
                   <a href="#">
-                    <img class="contacts-list-img" src="dist/img/user6-128x128.jpg" alt="User Avatar">
+                    <img class="contacts-list-img" src="<?= site_url() ?>assets/adminlte/img/user6-128x128.jpg" alt="User Avatar">
 
                     <div class="contacts-list-info">
                       <span class="contacts-list-name">
@@ -269,7 +296,7 @@
                 <!-- End Contact Item -->
                 <li>
                   <a href="#">
-                    <img class="contacts-list-img" src="dist/img/user8-128x128.jpg" alt="User Avatar">
+                    <img class="contacts-list-img" src="<?= site_url() ?>assets/adminlte/img/user8-128x128.jpg" alt="User Avatar">
 
                     <div class="contacts-list-info">
                       <span class="contacts-list-name">
@@ -584,3 +611,30 @@
 
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="<?= site_url() ?>assets/adminlte/js/pages/dashboard.js"></script>
+
+<script>
+  const getData = async () => {
+    return $.ajax({
+      url: "<?= site_url() ?>" + "dashboard/getNotifikasi",
+      type: 'POST',
+      dataType: 'JSON',
+      error: function(jqXHR, textStatus, errorThrown){
+        console.error(`Couldn't get the posts: ${textStatus}, error message: ${errorThrown}`)
+      }
+    }).done(response => response);
+  }
+
+  $(document).ready(async function(){
+    const notifikasi = await getData()
+
+    let html = ''
+    for(let i = 0; i < notifikasi.length; i++){
+      html += `<tr>`+
+                `<td>${i + 1}</td>`+
+                `<td><a href="${notifikasi[i].url}">${notifikasi[i].pesan}</a></td>`+
+              `</tr>`;
+    }
+
+    $('#bodyNotification').html(html)
+  })
+</script>

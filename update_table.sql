@@ -28,3 +28,9 @@ create table notifikasi(
     on update no action
     on delete no action
 )
+
+alter table notifikasi
+add column status varchar(20) default 'new'
+
+alter table notifikasi
+add column tanggal date default null
