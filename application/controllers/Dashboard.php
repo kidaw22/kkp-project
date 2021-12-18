@@ -27,7 +27,7 @@ class Dashboard extends CI_Controller
 
         $query_get_pengajuan = $this->db->query("select id
                                                     from pengajuan_inbox
-                                                    where status = 'Baru'");
+                                                    where status = 'Baru' and approver_id = '".$this->session->userdata('user_id')."'");
         $data['pengajuan_count'] = $query_get_pengajuan->num_rows();
 
         $this->template->display('dashboard', $data);

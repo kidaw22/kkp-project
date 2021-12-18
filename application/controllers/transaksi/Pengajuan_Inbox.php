@@ -54,7 +54,7 @@ class Pengajuan_inbox extends CI_Controller
                             ";
 
             if($prm_id !== ''){
-                $strQuery .= " AND a.id = $prm_id ";
+                $strQuery .= " OR a.id = $prm_id ";
             }
 
             $strQuery .= "order by id desc";

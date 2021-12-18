@@ -30,6 +30,12 @@
             dataType: 'JSON',
             success: function(data) {
                 let html = ''
+
+                let isDataTable = $.fn.DataTable.isDataTable('#table_data');
+                if(isDataTable){
+                    $('#table_data').DataTable().clear().destroy();
+                }
+
                 if (data.length) {
                     for (let i = 0; i < data.length; i++) {
                         html += `<tr>` +

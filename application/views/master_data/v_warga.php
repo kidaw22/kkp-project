@@ -7,16 +7,20 @@
         </div>
 
         <div class="row mt-2">
-            <table class="table table-bordered" id="table_data">
-                <thead class="text-center">
-                    <th>NIK</th>
-                    <th>Nama Warga</th>
-                    <th></th>
-                </thead>
-                <tbody>
-
-                </tbody>
-            </table>
+            <div class="col-lg-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="table_data">
+                        <thead class="text-center">
+                            <th>NIK</th>
+                            <th>Nama Warga</th>
+                            <th></th>
+                        </thead>
+                        <tbody>
+        
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -33,7 +37,7 @@
                     <div class="form-group">
                         <label class="col-form-label"> NIK </label>
                         <input type="hidden" name="id" id="id">
-                        <input type="text" name="nik" id="nik" class="form-control" required>
+                        <input type="text" name="nik" id="nik" class="form-control" minlength="16" maxlength="16" required>
                     </div>
 
                     <div class="form-group">
@@ -77,7 +81,7 @@
 
                     <div class="form-group">
                         <label class="col-form-label"> Nomor KK </label>
-                        <input type="number" name="No_KK" id="No_KK" class="form-control" required>
+                        <input type="number" name="No_KK" id="No_KK" class="form-control" minlength="16" maxlength="16" required>
                     </div>
                    
                     <div class="form-group">
@@ -114,6 +118,11 @@
                 if (data.length > 0) {
                     let html = '';
 
+                    let isDataTable = $.fn.DataTable.isDataTable('#table_data');
+                    if(isDataTable){
+                        $('#table_data').DataTable().clear().destroy();
+                    }
+
                     for (let i = 0; i < data.length; i++) {
                         html += '<tr>' +
                             `<td>${data[i].nik}</td>` +
@@ -123,6 +132,7 @@
                     }
 
                     $('#table_data tbody').html(html);
+                    $('#table_data').dataTable()
                 }
             }
         })
