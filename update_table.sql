@@ -34,3 +34,5 @@ add column status varchar(20) default 'new'
 
 alter table notifikasi
 add column tanggal date default null
+
+alter table warga add column tanggal_dibuat timestamp default CURRENT_TIMESTAMP
