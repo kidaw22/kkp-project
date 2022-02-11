@@ -23,7 +23,7 @@
             <div class="inner">
               <h3><?= $kegiatan_count ?></h3>
 
-              <p>Jumlah Kegiatan</p>
+              <p>Jumlah Bantuan</p>
             </div>
             <div class="icon">
               <i class="ion ion-document"></i>

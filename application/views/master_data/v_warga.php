@@ -10,13 +10,12 @@
             <div class="col-lg-12">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="table_data">
-                        <thead class="text-center">
+                        <thead class="text-center"> 
                             <th>NIK</th>
                             <th>Nama Warga</th>
                             <th></th>
                         </thead>
                         <tbody>
-        
                         </tbody>
                     </table>
                 </div>
