@@ -122,6 +122,12 @@
                 <p>Laporan Warga</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="<?= site_url() ?>laporan/laporan_bantuan" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Laporan Bantuan</p>
+              </a>
+            </li>
           </ul>
         </li>
       <?php } ?>

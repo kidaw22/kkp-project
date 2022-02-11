@@ -9,7 +9,7 @@
         <div class="row mt-2">
         <div class="table-responsive">
             <table class="table table-bordered" id="table_data">
-                <thead class="text-center">
+                <thead class="text-center bg-blue">
                     <th>Nama Bantuan</th>
                     <th>Periode Dari</th>
                     <th>Periode Sampai</th>
