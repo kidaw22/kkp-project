@@ -11,7 +11,7 @@ class Kegiatan extends CI_Controller
 
     public function index()
     {
-        $data['breadcrumb'] = 'Jadwal';
+        $data['breadcrumb'] = 'Jadwals';
         $data['content'] = 'transaksi/v_kegiatan';
         $this->template->display('dashboard', $data);
     }
