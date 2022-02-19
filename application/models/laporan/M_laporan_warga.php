@@ -15,7 +15,7 @@ class M_laporan_warga extends CI_Model{
                         case when usertype = 1 then 'Admin' else 'User' end as usertype,
                         Jumlah_Tanggungan,
                         DATE_FORMAT(tanggal_dibuat, '%Y-%m-%d') as tanggal_dibuat
-                        from Warga
+                        from warga
                         where tanggal_dibuat >= '$start' and tanggal_dibuat <= '$end'
                         ";
         
