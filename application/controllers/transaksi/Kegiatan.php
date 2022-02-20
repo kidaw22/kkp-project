@@ -11,9 +11,35 @@ class Kegiatan extends CI_Controller
 
     public function index()
     {
-        $data['breadcrumb'] = 'Jadwal';
+        $data['breadcrumb'] = 'Jadwals';
         $data['content'] = 'transaksi/v_kegiatan';
         $this->template->display('dashboard', $data);
+    }
+
+    public function preview($prm_event_id = '', $prm_user_id = ''){
+        $data['breadcrumb'] = 'Preview';
+        $data['content'] = 'transaksi/v_kegiatan_preview';
+        $data['event_id'] = $prm_event_id;
+        $this->template->display('dashboard', $data);
+    }
+
+    public function getPreviewData($prm_event = ''){
+        if($this->input->is_ajax_request()){
+            $strQuery = "SELECT
+                            (select Nama_Bantuan from bantuan where id = Judul_Kegiatan) as jenis_bantuan,
+                            Deskripsi_Kegiatan,
+                            date_format(Tanggal_Mulai, '%Y-%m-%d') as tanggal_pengambilan,
+                            concat(date_format(Tanggal_Mulai, '%H:%i'), ' - ', date_format(Tanggal_Akhir, '%H:%i')) as jam_pengambilan,
+                            Lokasi,
+                            Deskripsi_Lokasi
+                            from kegiatan
+                            where id = $prm_event";
+
+            $query = $this->db->query($strQuery);
+            $return_value = $query->row();
+
+            echo json_encode($return_value);
+        }
     }
 
     public function getKegiatan()
@@ -31,8 +57,8 @@ class Kegiatan extends CI_Controller
             $data = [
                 'Judul_Kegiatan' => $this->input->post('Judul_Kegiatan'),
                 'Deskripsi_Kegiatan' => $this->input->post('Deskripsi_Kegiatan'),
-                'Tanggal_Mulai' => $this->input->post('Tanggal_Mulai'),
-                'Tanggal_Akhir' => $this->input->post('Tanggal_Akhir'),
+                'Tanggal_Mulai' => $this->input->post('Tanggal_Mulai'). ' ' .$this->input->post('time_start'),
+                'Tanggal_Akhir' => $this->input->post('Tanggal_Akhir'). ' ' .$this->input->post('time_end'),
                 'Lokasi' => $this->input->post('Lokasi'),
                 'Deskripsi_Lokasi' => $this->input->post('Deskripsi_Lokasi'),
             ];
@@ -58,8 +84,19 @@ class Kegiatan extends CI_Controller
                         'Kegiatan_id' => $header['ID'],
                         'Warga_id' => $this->input->post('Peserta')[$i]
                     ];
-                }
 
+                    if (trim($this->input->post('id')) === "") {
+                        $notifikasi = [
+                            'dari_warga_id' => $this->session->userdata('user_id'),
+                            'untuk_warga_id' => $this->input->post('Peserta')[$i],
+                            'pesan' => 'Selamat, anda terpilih mendapatkan bantuan!',
+                            'url' => 'transaksi/kegiatan/preview/'.$header['ID'].'/'.$this->session->userdata('user_id'),
+                            'tanggal' => date('Y-m-d')
+                        ];
+                        $this->db->insert('notifikasi', $notifikasi);
+                    }
+                }
+                
                 $this->db->insert_batch('kegiatan_peserta', $detail);
             }
 

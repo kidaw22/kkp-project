@@ -51,6 +51,17 @@
                         </div>
                     </div>
 
+                    <div class="form-group row">
+                        <div class="col-lg-6">
+                            <label class="col-form-label"> Jam Mulai </label>
+                            <input type="time" name="time_start" id="time_start" class="form-control">
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="col-form-label"> Jam Selesai </label>
+                            <input type="time" name="time_end" id="time_end" class="form-control">
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label class="col-form-label"> Peserta </label>
                         <select name="Peserta[]" id="Peserta" class="form-control" required multiple>
@@ -109,7 +120,7 @@
             type: 'POST',
             dataType: 'JSON',
             success: function(data) {
-                // console.log(data);
+                console.log(data.Jam_Mulai);
                 $('#id').val(data.id);
                 $('#Judul_Kegiatan').val(data.Judul_Kegiatan);
                 $('#Deskripsi_Kegiatan').val(data.Deskripsi_Kegiatan);
@@ -117,6 +128,8 @@
                 $('#Deskripsi_Lokasi').val(data.Deskripsi_Lokasi);
                 $('#Tanggal_Mulai').val(data.Tanggal_Mulai);
                 $('#Tanggal_Akhir').val(data.Tanggal_Akhir);
+                $('#time_start').val(data.Jam_Mulai);
+                $('#time_end').val(data.Jam_Akhir);
 
                 if (data.detail.length > 0) {
                     $.each(data.detail, function(key, val) {

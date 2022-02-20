@@ -88,7 +88,8 @@ class Pengajuan_inbox extends CI_Controller
                 'dari_warga_id' => $this->session->userdata('user_id'),
                 'untuk_warga_id' => $this->input->post('warga_id'),
                 'url' => 'transaksi/pengajuan_inbox/form/'.$this->input->post('id'),
-                'pesan' => 'Pengajuan anda sudah disetujui!'
+                'pesan' => 'Pengajuan anda sudah disetujui!',
+                'tanggal' => date('Y-m-d')
             ];
 
             $this->db->insert('notifikasi', $data);
@@ -120,7 +121,8 @@ class Pengajuan_inbox extends CI_Controller
                 'dari_warga_id' => $this->session->userdata('user_id'),
                 'untuk_warga_id' => $this->input->post('warga_id'),
                 'url' => 'transaksi/pengajuan_inbox/form/'.$this->input->post('id'),
-                'pesan' => 'Pengajuan anda ditolak!'
+                'pesan' => 'Pengajuan anda ditolak!',
+                'tanggal' => date('Y-m-d')
             ];
 
             $this->db->insert('notifikasi', $data);

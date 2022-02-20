@@ -29,4 +29,14 @@ create table notifikasi(
     on delete no action
 )
 
+<<<<<<< HEAD
 ALTER TABLE `pengajuan` CHANGE `no_ktp` `no_ktp` BIGINT(16) NOT NULL; 
+=======
+alter table notifikasi
+add column status varchar(20) default 'new'
+
+alter table notifikasi
+add column tanggal date default null
+
+alter table warga add column tanggal_dibuat timestamp default CURRENT_TIMESTAMP
+>>>>>>> 91fb350ac4dfd7014d7137f4ad7edd689e422624

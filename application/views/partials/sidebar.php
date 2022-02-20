@@ -33,6 +33,23 @@
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
       <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-users"></i>
+          <p>
+            User
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="<?= site_url() ?>user/change_pwd" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Ubah Kata Sandi</p>
+            </a>
+          </li>
+        </ul>
+      </li>
       <?php if ((int)$this->session->userdata('usertype') === 1) { ?>
         <li class="nav-item">
           <a href="#" class="nav-link">
@@ -74,6 +91,12 @@
                 <p>Jadwal Bantuan</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="<?= site_url() ?>transaksi/pengajuan_inbox" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Kotak Masuk Pengajuan </p>
+              </a>
+            </li>
           <?php } ?>
           <li class="nav-item">
             <a href="<?= site_url() ?>transaksi/pengajuan" class="nav-link">
@@ -82,46 +105,47 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?= site_url() ?>transaksi/pengajuan_inbox" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Kotak Masuk Pengajuan </p>
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="<?= site_url() ?>transaksi/pengumuman" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>Pengumuman</p>
             </a>
           </li>
-        </ul>
       </li>
-      <?php if ((int)$this->session->userdata('usertype') === 1) { ?>
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-flag"></i>
-            <p>
-              Laporan
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="<?= site_url() ?>master_data/warga" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Laporan Bantuan</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-      <?php } ?>
+    </ul>
+    </li>
+    <?php if ((int)$this->session->userdata('usertype') === 1) { ?>
       <li class="nav-item">
-        <a href="<?= site_url('login/logout') ?>" class="nav-link">
-          <i class="nav-icon fas fa-power-off"></i>
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-flag"></i>
           <p>
-            Keluar
+            Laporan
+            <i class="right fas fa-angle-left"></i>
           </p>
         </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="<?= site_url() ?>laporan/laporan_warga" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Laporan Warga</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?= site_url() ?>laporan/laporan_bantuan" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Laporan Bantuan</p>
+            </a>
+          </li>
+        </ul>
       </li>
+    <?php } ?>
+    <li class="nav-item">
+      <a href="<?= site_url('login/logout') ?>" class="nav-link">
+        <i class="nav-icon fas fa-power-off"></i>
+        <p>
+          Keluar
+        </p>
+      </a>
+    </li>
     </ul>
   </nav>
   <!-- /.sidebar-menu -->

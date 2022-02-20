@@ -21,7 +21,9 @@ class M_kegiatan extends CI_Model{
                             Lokasi,
                             Deskripsi_Lokasi,
                             date_format(Tanggal_Mulai, '%Y-%m-%d') as Tanggal_Mulai,
-                            date_format(Tanggal_Akhir, '%Y-%m-%d') as Tanggal_Akhir
+                            date_format(Tanggal_Akhir, '%Y-%m-%d') as Tanggal_Akhir,
+                            date_format(Tanggal_Mulai, '%H:%i:%S') as Jam_Mulai,
+                            date_format(Tanggal_Akhir, '%H:%i:%S') as Jam_Akhir
                             from kegiatan
                             where id = $prm_id";
 

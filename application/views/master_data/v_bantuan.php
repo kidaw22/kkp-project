@@ -7,8 +7,9 @@
         </div>
 
         <div class="row mt-2">
+        <div class="table-responsive">
             <table class="table table-bordered" id="table_data">
-                <thead class="text-center">
+                <thead class="text-center bg-blue">
                     <th>Nama Bantuan</th>
                     <th>Periode Dari</th>
                     <th>Periode Sampai</th>
@@ -77,6 +78,11 @@
                 if (data.length > 0) {
                     let html = '';
 
+                    let isDataTable = $.fn.DataTable.isDataTable('#table_data');
+                    if(isDataTable){
+                        $('#table_data').DataTable().clear().destroy();
+                    }
+                    
                     for (let i = 0; i < data.length; i++) {
                         html += '<tr>' +
                             `<td><a class="item-edit" href="javascript:void(0)" data-id="${data[i].id}"> ${data[i].Nama_Bantuan}</a></td>` +
@@ -87,6 +93,7 @@
                     }
 
                     $('#table_data tbody').html(html);
+                    $('#table_data').dataTable()
                 }
             }
         })
