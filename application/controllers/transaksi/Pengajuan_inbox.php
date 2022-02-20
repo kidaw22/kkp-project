@@ -29,6 +29,11 @@ class Pengajuan_inbox extends CI_Controller
     public function getInbox($prm_id = '')
     {
         if ($this->input->is_ajax_request()) {
+            $where = " a.approver_id = '" . $this->session->userdata('user_id') . "'";
+            if ($prm_id !== '') {
+                $where = " a.id = $prm_id ";
+            }
+
             $strQuery = "SELECT
                             a.id,
                             a.pengajuan_id,
@@ -50,24 +55,24 @@ class Pengajuan_inbox extends CI_Controller
                             from pengajuan_inbox a
                             left join pengajuan b
                             on a.pengajuan_id = b.id
-                            where a.approver_id = '" . $this->session->userdata('user_id') . "'
+                            where $where
                             ";
-
-            if($prm_id !== ''){
-                $strQuery .= " AND a.id = $prm_id ";
-            }
 
             $strQuery .= "order by id desc";
 
             $query = $this->db->query($strQuery);
+            // echo '<pre>';
+            // print_r($this->db->last_query());
+            // exit;
             $return_value = ($prm_id === "") ? $query->result_array() : $query->row();
 
             echo json_encode($return_value);
         }
     }
 
-    public function approved(){
-        if($this->input->is_ajax_request()){
+    public function approved()
+    {
+        if ($this->input->is_ajax_request()) {
             $data = [
                 'tanggal_Disetujui' => date('Y-m-d'),
                 'approved_By' => $this->session->userdata('user_id')
@@ -87,7 +92,7 @@ class Pengajuan_inbox extends CI_Controller
             $data = [
                 'dari_warga_id' => $this->session->userdata('user_id'),
                 'untuk_warga_id' => $this->input->post('warga_id'),
-                'url' => 'transaksi/pengajuan_inbox/form/'.$this->input->post('id'),
+                'url' => 'transaksi/pengajuan_inbox/form/' . $this->input->post('id'),
                 'pesan' => 'Pengajuan anda sudah disetujui!',
                 'tanggal' => date('Y-m-d')
             ];
@@ -99,8 +104,9 @@ class Pengajuan_inbox extends CI_Controller
         }
     }
 
-    public function reject(){
-        if($this->input->is_ajax_request()){
+    public function reject()
+    {
+        if ($this->input->is_ajax_request()) {
             $data = [
                 'tanggal_Disetujui' => date('Y-m-d'),
                 'approved_By' => $this->session->userdata('user_id')
@@ -120,7 +126,7 @@ class Pengajuan_inbox extends CI_Controller
             $data = [
                 'dari_warga_id' => $this->session->userdata('user_id'),
                 'untuk_warga_id' => $this->input->post('warga_id'),
-                'url' => 'transaksi/pengajuan_inbox/form/'.$this->input->post('id'),
+                'url' => 'transaksi/pengajuan_inbox/form/' . $this->input->post('id'),
                 'pesan' => 'Pengajuan anda ditolak!',
                 'tanggal' => date('Y-m-d')
             ];
